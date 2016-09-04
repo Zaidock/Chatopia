@@ -16,14 +16,13 @@ public class Player extends GameObject {
 	public BufferedImage playerUp1;
 
 	private Handler handler;
-	
+		
 	private boolean castleDoor = false;
 	public Player(float x, float y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		try {
 			playerStill = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-00-02.png"));
-			System.out.println("succsess");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +40,6 @@ public class Player extends GameObject {
 			setY(426 - 33);
 		if (getY() < 55)
 			setY(55 - 1);
-
 		// Castle
 		if (getX() > 127 && getY() <= 82 && getX() < 227) {
 			if(castleDoor == false){

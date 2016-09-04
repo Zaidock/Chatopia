@@ -28,18 +28,25 @@ public class Chatopia extends Canvas implements Runnable {
 
 	BufferedImage castleWall, CastleWallAccsesorys;
 
+	
+	
 	public enum State {
-		Menu, Game
+		Menu, Game, paused
+	};
+	
+	public enum Maps{
+		room, kichen, outsideHouse, castleWall
 	};
 
-	public State gameState = State.Game;
+	public State gameState = State.Menu;
+	public Maps currentMap = Maps.room;
 
 	public Chatopia() {
 
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(menu);
 
-		new Window((int) WIDTH, (int) HEIGHT, "Chatopia Alpha", this);
+		new Window((int) WIDTH, (int) HEIGHT, "Chatopia Alpha ", this);
 
 		hud = new HUD();
 		
@@ -100,7 +107,11 @@ public class Chatopia extends Canvas implements Runnable {
 
 	private void tick() {
 		handler.tick();
-		hud.tick();
+		if (gameState == State.Game) {
+			hud.tick();
+		}else if(gameState == State.Menu){
+			menu.tick();
+		}
 	}
 
 	private void render() {
@@ -111,22 +122,22 @@ public class Chatopia extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		
-		
-		
+		if(gameState == State.Game){
 		try {
 			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
 			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		hud.render(g);
-		
+
 		g.drawImage(castleWall, 0, 0, null);
 		handler.render(g);
 		g.drawImage(CastleWallAccsesorys, 0, 0, null);
-
+		}else if(gameState == State.Menu){
+			menu.render(g);
+		}
 		g.dispose();
 		bs.show();
 	}
