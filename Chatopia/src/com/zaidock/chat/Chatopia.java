@@ -39,7 +39,7 @@ public class Chatopia extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(menu);
 
-		new Window((int) WIDTH, (int) HEIGHT, "Chatopia", this);
+		new Window((int) WIDTH, (int) HEIGHT, "Chatopia Alpha", this);
 
 		hud = new HUD();
 		
