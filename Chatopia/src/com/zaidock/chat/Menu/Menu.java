@@ -1,4 +1,4 @@
-package com.zaidock.chat.states;
+package com.zaidock.chat.Menu;
 
 import java.awt.Color;
 import java.awt.Font;

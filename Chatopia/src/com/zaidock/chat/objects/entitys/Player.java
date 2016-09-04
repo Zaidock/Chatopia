@@ -6,8 +6,11 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.zaidock.chat.Chatopia;
+import com.zaidock.chat.Chatopia.Maps;
 import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.objects.other.Speech;
 import com.zaidock.chat.utills.Handler;
 
 public class Player extends GameObject {
@@ -16,9 +19,11 @@ public class Player extends GameObject {
 	public BufferedImage playerUp1;
 
 	private Handler handler;
-		
+	private Chatopia game;
+
 	private boolean castleDoor = false;
-	public Player(float x, float y, ID id, Handler handler) {
+
+	public Player(float x, float y, ID id, Handler handler, Chatopia game) {
 		super(x, y, id);
 		this.handler = handler;
 		try {
@@ -29,7 +34,6 @@ public class Player extends GameObject {
 	}
 
 	public void tick() {
-		// TODO Change when making map changing
 		x += velX;
 		y += velY;
 		if (getX() >= 609 - 16)
@@ -40,14 +44,7 @@ public class Player extends GameObject {
 			setY(426 - 33);
 		if (getY() < 55)
 			setY(55 - 1);
-		// Castle
-		if (getX() > 127 && getY() <= 82 && getX() < 227) {
-			if(castleDoor == false){
-				//handler.addObject(new Speech(256, 74, ID.speech));
-				castleDoor = true;
-			}
-		}
-		collision();
+	collision();
 	}
 
 	public void collision() {
@@ -66,11 +63,15 @@ public class Player extends GameObject {
 
 	public void render(Graphics g) {
 		g.drawImage(playerStill, (int) x, (int) y, 64, 64, null);
-		//g.setColor(Color.red);
-		//g.fillRect((int)x,(int) y, 32, 32);
+		// g.setColor(Color.red);
+		// g.fillRect((int)x,(int) y, 32, 32);
 	}
 
 	public Rectangle getBounds() {
 		return new Rectangle((int) x + 16, (int) y + 16, 32, 48);
+	}
+
+	public void removePlayer() {
+		handler.removeObject(this);
 	}
 }

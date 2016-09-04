@@ -7,10 +7,11 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.zaidock.chat.Menu.Menu;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
+import com.zaidock.chat.objects.entitys.Guard;
 import com.zaidock.chat.objects.entitys.Player;
-import com.zaidock.chat.states.Menu;
 import com.zaidock.chat.utills.Handler;
 
 public class Chatopia extends Canvas implements Runnable {
@@ -26,31 +27,38 @@ public class Chatopia extends Canvas implements Runnable {
 	private HUD hud;
 	private Menu menu = new Menu(this);
 
-	BufferedImage castleWall, CastleWallAccsesorys;
+	BufferedImage room, castleWall, CastleWallAccsesorys;
 
-	
-	
 	public enum State {
 		Menu, Game, paused
 	};
-	
-	public enum Maps{
-		room, kichen, outsideHouse, castleWall
-	};
 
+	public enum Maps {
+		room, kichen, house, castleWall, dengeon
+	};
+	
 	public State gameState = State.Menu;
 	public Maps currentMap = Maps.room;
 
 	public Chatopia() {
 
-		this.addKeyListener(new KeyInput(handler));
+		this.addKeyListener(new KeyInput(handler, this));
 		this.addMouseListener(menu);
 
 		new Window((int) WIDTH, (int) HEIGHT, "Chatopia Alpha ", this);
 
 		hud = new HUD();
 		
-		handler.addObject(new Player(100, HEIGHT / 2, ID.Player, handler));
+		try {
+			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
+			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
+			room = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		handler.addObject(new Player(367, 108, ID.Player, handler, this));
+		//handler.addObject(new Guard(216, 68, ID.Guard));
 		addCollisions();
 	}
 
@@ -109,7 +117,7 @@ public class Chatopia extends Canvas implements Runnable {
 		handler.tick();
 		if (gameState == State.Game) {
 			hud.tick();
-		}else if(gameState == State.Menu){
+		} else if (gameState == State.Menu) {
 			menu.tick();
 		}
 	}
@@ -122,38 +130,39 @@ public class Chatopia extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		if(gameState == State.Game){
-		try {
-			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
-			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		if (gameState == State.Game) {
+			if (currentMap == Maps.castleWall) {
+				hud.render(g);
 
-		hud.render(g);
-
-		g.drawImage(castleWall, 0, 0, null);
-		handler.render(g);
-		g.drawImage(CastleWallAccsesorys, 0, 0, null);
-		}else if(gameState == State.Menu){
+				g.drawImage(castleWall, 0, 0, null);
+				handler.render(g);
+				g.drawImage(CastleWallAccsesorys, 0, 0, null);
+			}else if(currentMap == Maps.room){
+				hud.render(g);
+				g.drawImage(room, 0, 0, null);
+				handler.render(g);
+			}
+		} else if (gameState == State.Menu) {
 			menu.render(g);
-		}
+		} 
 		g.dispose();
 		bs.show();
 	}
 
 	public void addCollisions() {
-		handler.addObject(new Collisions(0, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(0, 384 - 32, ID.CollisionBox));
-		handler.addObject(new Collisions(96, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(96, 384 - 32, ID.CollisionBox));
-		handler.addObject(new Collisions(256, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(256, 384 - 32, ID.CollisionBox));
-		handler.addObject(new Collisions(352, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(352, 384 - 32, ID.CollisionBox));
-		handler.addObject(new Collisions(450, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(450, 384 - 32, ID.CollisionBox));
-		handler.addObject(new Collisions(544, 384, ID.CollisionBox));
-		handler.addObject(new Collisions(544, 384 - 32, ID.CollisionBox));
+		if (currentMap == Maps.castleWall) {
+			handler.addObject(new Collisions(0, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(0, 384 - 32, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(96, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(96, 384 - 32, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(256, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(256, 384 - 32, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(352, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(352, 384 - 32, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(450, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(450, 384 - 32, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(544, 384, ID.CollisionBox, handler));
+			handler.addObject(new Collisions(544, 384 - 32, ID.CollisionBox, handler));
+		}
 	}
 }

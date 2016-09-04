@@ -5,11 +5,15 @@ import java.awt.Rectangle;
 
 import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.utills.Handler;
 
 public class Collisions extends GameObject {
+	
+	private Handler handler;
 
-	public Collisions(float x, float y, ID id) {
+	public Collisions(float x, float y, ID id, Handler handler) {
 		super(x, y, id);
+		this.handler = handler;
 	}
 
 	@Override
@@ -28,4 +32,8 @@ public class Collisions extends GameObject {
 		return new Rectangle((int)x,(int) y, 32, 32);
 	}
 
+	public void removeCollisions(){
+		handler.object.remove(this);
+	}
+	
 }
