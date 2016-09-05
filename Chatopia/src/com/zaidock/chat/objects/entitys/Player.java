@@ -20,12 +20,11 @@ public class Player extends GameObject {
 
 	private Handler handler;
 	private Chatopia game;
-
-	private boolean castleDoor = false;
-
+	
 	public Player(float x, float y, ID id, Handler handler, Chatopia game) {
 		super(x, y, id);
 		this.handler = handler;
+		this.game = game;
 		try {
 			playerStill = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-00-02.png"));
 		} catch (Exception e) {
@@ -44,7 +43,22 @@ public class Player extends GameObject {
 			setY(426 - 33);
 		if (getY() < 55)
 			setY(55 - 1);
-	collision();
+		
+		if(game.currentMap == Maps.room){
+			if(getX() > 463 && getX() < 493 && getY() <= 54){
+				game.currentMap = Maps.castleWall;
+				handler.removeObject(this);
+				handler.addObject(new Player(1, 233, ID.Player, handler, game));
+			}
+		}
+		
+		if(game.currentMap == Maps.castleWall){
+			if(getX() > 139 && getX() < 217 && getY() == 81){
+				handler.addObject(new Speech(15, Chatopia.HEIGHT, ID.speech, "I can't let yo in unless *cough* *cough* you have somthing for me?", 10, handler, game));
+			}
+		}
+		
+		collision();
 	}
 
 	public void collision() {
@@ -63,8 +77,8 @@ public class Player extends GameObject {
 
 	public void render(Graphics g) {
 		g.drawImage(playerStill, (int) x, (int) y, 64, 64, null);
-		// g.setColor(Color.red);
-		// g.fillRect((int)x,(int) y, 32, 32);
+		//g.setColor(Color.red);
+		//g.fillRect((int) x, (int) y, 32, 32);
 	}
 
 	public Rectangle getBounds() {

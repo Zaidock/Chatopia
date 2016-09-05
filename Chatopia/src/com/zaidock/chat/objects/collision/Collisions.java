@@ -10,10 +10,14 @@ import com.zaidock.chat.utills.Handler;
 public class Collisions extends GameObject {
 	
 	private Handler handler;
+	
+	private int width, height;
 
-	public Collisions(float x, float y, ID id, Handler handler) {
+	public Collisions(float x, float y, int width, int height, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
+		this.width = width;
+		this.height = height;
 	}
 
 	@Override
@@ -29,7 +33,7 @@ public class Collisions extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int)x,(int) y, 32, 32);
+		return new Rectangle((int)x,(int) y, width, height);
 	}
 
 	public void removeCollisions(){

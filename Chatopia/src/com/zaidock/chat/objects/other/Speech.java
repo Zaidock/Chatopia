@@ -6,9 +6,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import com.zaidock.chat.Chatopia;
+import com.zaidock.chat.Chatopia.State;
 import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
-import com.zaidock.chat.Chatopia.State;
+import com.zaidock.chat.utills.Handler;
 
 public class Speech extends GameObject{
 
@@ -17,13 +18,16 @@ public class Speech extends GameObject{
 	private int time;
 	
 	private Chatopia game;
+	private Handler handler;
 
 	private int timer = 0;
 
-	public Speech(float x, float y, ID id, String text, int time, Chatopia game) {
+	public Speech(float x, float y, ID id, String text, int time, Handler handler, Chatopia game) {
 		super(x, y, id);
 		this.text = text;
 		this.time = time;
+		this.handler = handler;
+		this.game = game;
 	}
 
 	public void tick() {
@@ -40,7 +44,7 @@ public class Speech extends GameObject{
 		g.drawString(text, 15, Chatopia.HEIGHT - 30);
 		g.clearRect(15, Chatopia.HEIGHT - 15, 15, Chatopia.HEIGHT - 15);
 		if (timer == time * 60 && !(game.gameState == State.paused)) {
-			g.drawString(text, 15, Chatopia.HEIGHT - 30);
+			handler.removeObject(this);
 		}
 	}
 
