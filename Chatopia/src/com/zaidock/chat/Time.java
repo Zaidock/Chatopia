@@ -6,9 +6,9 @@ import java.awt.Graphics;
 import com.zaidock.chat.Chatopia.State;
 
 public class Time {
-	
+
 	private Chatopia game;
-	
+
 	public Time(Chatopia game) {
 		this.game = game;
 	}
@@ -16,11 +16,11 @@ public class Time {
 	int seconds = 0;
 	int minutes = 0;
 	int hours = 0;
-	
+
 	String time;
 
 	public void tick() {
-		if(game.gameState == State.paused)
+		if (game.gameState == State.paused)
 			return;
 		seconds++;
 		if (seconds == 60) {
@@ -28,16 +28,16 @@ public class Time {
 			seconds = 0;
 			System.out.println(hours + ":" + minutes);
 		}
-		if(minutes == 60){
+		if (minutes == 60) {
 			hours++;
 			minutes = 0;
 		}
-		if(hours == 24){
+		if (hours == 24) {
 			hours = 0;
 		}
 	}
-	
-	public void render(Graphics g){
+
+	public void render(Graphics g) {
 		Font font = new Font("arial", 1, 15);
 		g.setFont(font);
 		g.drawString("hi", 15, Chatopia.HEIGHT - 15);

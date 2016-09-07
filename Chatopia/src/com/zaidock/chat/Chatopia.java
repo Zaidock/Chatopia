@@ -3,9 +3,6 @@ package com.zaidock.chat;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
 
 import com.zaidock.chat.Menu.Menu;
 import com.zaidock.chat.keys.KeyInput;
@@ -23,14 +20,13 @@ public class Chatopia extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 
-	private Handler handler = new Handler();;
+	private Handler handler = new Handler();
 	private HUD hud;
 	private Menu menu = new Menu(this);
 	private Time time = new Time(this);
+	private BackGround background = new BackGround(this);
 	
 	private boolean addedGuard = false;
-
-	BufferedImage room, castleWall, CastleWallAccsesorys, house;
 
 	public enum State {
 		Menu, Game, paused
@@ -51,15 +47,6 @@ public class Chatopia extends Canvas implements Runnable {
 		new Window((int) WIDTH, (int) HEIGHT, "Chatopia Alpha ", this);
 
 		hud = new HUD();
-
-		try {
-			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
-			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
-			room = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
-			house = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		System.out.println("TODO: Add Collisions to room");
 
@@ -123,6 +110,7 @@ public class Chatopia extends Canvas implements Runnable {
 		if (gameState == State.Game) {
 			hud.tick();
 			time.tick();
+			background.tick();
 		} else if (gameState == State.Menu) {
 			menu.tick();
 		}
@@ -137,12 +125,10 @@ public class Chatopia extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		if (gameState == State.Game) {
+			background.render(g);
 			if (currentMap == Maps.castleWall) {
 				hud.render(g);
-
-				g.drawImage(castleWall, 0, 0, null);
 				handler.render(g);
-				g.drawImage(CastleWallAccsesorys, 0, 0, null);
 				if (addedGuard == false)
 					handler.addObject(new Guard(216, 68, ID.Guard));
 			} else {
@@ -151,12 +137,10 @@ public class Chatopia extends Canvas implements Runnable {
 				}
 				if (currentMap == Maps.room) {
 					hud.render(g);
-					g.drawImage(room, 0, 0, null);
 					handler.render(g);
 				}
 				if(currentMap == Maps.house){
 					hud.render(g);
-					g.drawImage(house, 0, 0, null);
 					handler.render(g);
 				}
 			}
