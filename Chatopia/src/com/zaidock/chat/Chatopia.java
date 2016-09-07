@@ -26,7 +26,7 @@ public class Chatopia extends Canvas implements Runnable {
 	private Handler handler = new Handler();;
 	private HUD hud;
 	private Menu menu = new Menu(this);
-	private Time time = new Time();
+	private Time time = new Time(this);
 	
 	private boolean addedGuard = false;
 
