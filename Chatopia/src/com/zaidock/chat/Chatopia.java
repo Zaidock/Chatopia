@@ -26,7 +26,8 @@ public class Chatopia extends Canvas implements Runnable {
 	private Handler handler = new Handler();;
 	private HUD hud;
 	private Menu menu = new Menu(this);
-
+	private Time time = new Time();
+	
 	private boolean addedGuard = false;
 
 	BufferedImage room, castleWall, CastleWallAccsesorys, house;
@@ -121,6 +122,7 @@ public class Chatopia extends Canvas implements Runnable {
 		handler.tick();
 		if (gameState == State.Game) {
 			hud.tick();
+			time.tick();
 		} else if (gameState == State.Menu) {
 			menu.tick();
 		}
