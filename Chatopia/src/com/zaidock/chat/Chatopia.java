@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import com.zaidock.chat.Menu.Menu;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
+import com.zaidock.chat.objects.entitys.Guard;
 import com.zaidock.chat.objects.entitys.Player;
 import com.zaidock.chat.utills.Handler;
 
@@ -26,7 +27,9 @@ public class Chatopia extends Canvas implements Runnable {
 	private HUD hud;
 	private Menu menu = new Menu(this);
 
-	BufferedImage room, castleWall, CastleWallAccsesorys;
+	private boolean addedGuard = false;
+
+	BufferedImage room, castleWall, CastleWallAccsesorys, house;
 
 	public enum State {
 		Menu, Game, paused
@@ -52,14 +55,14 @@ public class Chatopia extends Canvas implements Runnable {
 			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
 			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
 			room = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
+			house = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		System.out.println("TODO: Add Collisions to room");
-		
+
 		handler.addObject(new Player(367, 108, ID.Player, handler, this));
-		// handler.addObject(new Guard(216, 68, ID.Guard));
 		addCollisions();
 	}
 
@@ -138,10 +141,22 @@ public class Chatopia extends Canvas implements Runnable {
 				g.drawImage(castleWall, 0, 0, null);
 				handler.render(g);
 				g.drawImage(CastleWallAccsesorys, 0, 0, null);
-			} else if (currentMap == Maps.room) {
-				hud.render(g);
-				g.drawImage(room, 0, 0, null);
-				handler.render(g);
+				if (addedGuard == false)
+					handler.addObject(new Guard(216, 68, ID.Guard));
+			} else {
+				if(!(currentMap == Maps.castleWall)){
+					handler.removeObject(new Guard(216, 68, ID.Guard));
+				}
+				if (currentMap == Maps.room) {
+					hud.render(g);
+					g.drawImage(room, 0, 0, null);
+					handler.render(g);
+				}
+				if(currentMap == Maps.house){
+					hud.render(g);
+					g.drawImage(house, 0, 0, null);
+					handler.render(g);
+				}
 			}
 		} else if (gameState == State.Menu) {
 			menu.render(g);
