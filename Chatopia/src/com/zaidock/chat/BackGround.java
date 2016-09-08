@@ -12,24 +12,29 @@ public class BackGround {
 
 	private BufferedImage background;
 
+	private boolean changingBackground = true;
+
 	public BackGround(Chatopia game) {
 		this.game = game;
 	}
 
 	public void tick() {
-		try {
-			if (game.currentMap == Maps.room) {
-				background = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
+		if (changingBackground) {
+			try {
+				if (game.currentMap == Maps.room) {
+					background = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
+				}
+				if (game.currentMap == Maps.house) {
+					background = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
+				}
+				if (game.currentMap == Maps.castleWall) {
+					background = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			if(game.currentMap == Maps.house){
-				background = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
-			}
-			if(game.currentMap == Maps.castleWall){
-				background = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		return;
 	}
 
 	public void render(Graphics g) {

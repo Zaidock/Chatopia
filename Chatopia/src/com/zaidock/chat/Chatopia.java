@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 import com.zaidock.chat.Menu.Menu;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
-import com.zaidock.chat.objects.entitys.Guard;
 import com.zaidock.chat.objects.entitys.Player;
 import com.zaidock.chat.utills.Handler;
 
@@ -25,8 +24,6 @@ public class Chatopia extends Canvas implements Runnable {
 	private Menu menu = new Menu(this);
 	private Time time = new Time(this);
 	private BackGround background = new BackGround(this);
-	
-	private boolean addedGuard = false;
 
 	public enum State {
 		Menu, Game, paused
@@ -125,21 +122,19 @@ public class Chatopia extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		if (gameState == State.Game) {
-			background.render(g);
 			if (currentMap == Maps.castleWall) {
+				background.render(g);
 				hud.render(g);
 				handler.render(g);
-				if (addedGuard == false)
-					handler.addObject(new Guard(216, 68, ID.Guard));
+
 			} else {
-				if(!(currentMap == Maps.castleWall)){
-					handler.removeObject(new Guard(216, 68, ID.Guard));
-				}
 				if (currentMap == Maps.room) {
+					background.render(g);
 					hud.render(g);
 					handler.render(g);
 				}
-				if(currentMap == Maps.house){
+				if (currentMap == Maps.house) {
+					background.render(g);
 					hud.render(g);
 					handler.render(g);
 				}
