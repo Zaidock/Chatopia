@@ -43,10 +43,15 @@ public class KeyInput extends KeyAdapter {
 					if (key == KeyEvent.VK_P) {
 						System.out.println(tempObject.getX() + "," + tempObject.getY());
 					}
+					if (key == KeyEvent.VK_F3) {
+						if(game.showfps == false)
+						game.showfps = true;
+						else if(game.showfps == true){
+							game.showfps = false;
+						}
+						
+					}
 				}
-				/*
-				 * if(key == KeyEvent.VK_B) tempObject.showHitBox(g);
-				 */
 			}
 		}
 

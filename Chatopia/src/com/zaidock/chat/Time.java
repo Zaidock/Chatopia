@@ -26,6 +26,7 @@ public class Time {
 		if (seconds == 60) {
 			minutes++;
 			seconds = 0;
+			System.out.println(hours + ":" + minutes);
 		}
 		if (minutes == 60) {
 			hours++;

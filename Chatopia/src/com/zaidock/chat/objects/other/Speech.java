@@ -11,12 +11,12 @@ import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.Handler;
 
-public class Speech extends GameObject{
+public class Speech extends GameObject {
 
 	private String text;
 
 	private int time;
-	
+
 	private Chatopia game;
 	private Handler handler;
 
