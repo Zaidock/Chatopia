@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import com.zaidock.chat.Menu.Menu;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
-import com.zaidock.chat.objects.entitys.Guard;
 import com.zaidock.chat.objects.entitys.Player;
 import com.zaidock.chat.objects.other.Speech;
 import com.zaidock.chat.utills.Handler;
@@ -24,14 +23,14 @@ public class Chatopia extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 
-	private Handler handler = new Handler();;
+	private Handler handler = new Handler();
 	private HUD hud;
 	private Menu menu = new Menu(this);
 	private Time time = new Time(this);
-	
-	private boolean addedGuard = false;
+
 	public boolean showfps = false;
-	
+	public boolean addedCollisions = false;
+
 	BufferedImage room, castleWall, CastleWallAccsesorys, house;
 
 	public enum State {
@@ -55,7 +54,7 @@ public class Chatopia extends Canvas implements Runnable {
 		hud = new HUD();
 
 		try {
-			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.png"));
+			castleWall = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWall.bmp"));
 			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
 			room = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
 			house = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
@@ -66,6 +65,7 @@ public class Chatopia extends Canvas implements Runnable {
 		System.out.println("TODO: Add Collisions to room");
 
 		handler.addObject(new Player(367, 108, ID.Player, handler, this));
+		removeCollisions();
 		addCollisions();
 	}
 
@@ -111,11 +111,11 @@ public class Chatopia extends Canvas implements Runnable {
 				render();
 			frames++;
 
-			if (System.currentTimeMillis() - timer > 1000) {	
+			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
-				if(showfps)
-				handler.addObject(new Speech(15, 15, ID.speech, "FPS: " + frames, 1, handler, this));
+				// System.out.println("FPS: " + frames);
+				if (showfps && !(gameState == State.paused))
+					handler.addObject(new Speech(15, 15, ID.speech, "FPS: " + frames, 1, handler, this));
 				frames = 0;
 			}
 		}
@@ -130,6 +130,8 @@ public class Chatopia extends Canvas implements Runnable {
 		} else if (gameState == State.Menu) {
 			menu.tick();
 		}
+		if(addedCollisions == false)
+			addCollisions();
 	}
 
 	private void render() {
@@ -147,18 +149,15 @@ public class Chatopia extends Canvas implements Runnable {
 				g.drawImage(castleWall, 0, 0, null);
 				handler.render(g);
 				g.drawImage(CastleWallAccsesorys, 0, 0, null);
-				if (addedGuard == false)
-					handler.addObject(new Guard(216, 68, ID.Guard));
 			} else {
-				if(!(currentMap == Maps.castleWall)){
-					handler.removeObject(new Guard(216, 68, ID.Guard));
+				if (!(currentMap == Maps.castleWall)) {
 				}
 				if (currentMap == Maps.room) {
 					hud.render(g);
 					g.drawImage(room, 0, 0, null);
 					handler.render(g);
 				}
-				if(currentMap == Maps.house){
+				if (currentMap == Maps.house) {
 					hud.render(g);
 					g.drawImage(house, 0, 0, null);
 					handler.render(g);
@@ -172,19 +171,41 @@ public class Chatopia extends Canvas implements Runnable {
 	}
 
 	public void addCollisions() {
+		if (addedCollisions == false) {
 		if (currentMap == Maps.castleWall) {
-			handler.addObject(new Collisions(0, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(0, 384 - 32, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(96, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(96, 384 - 32, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(256, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(256, 384 - 32, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(352, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(352, 384 - 32, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(450, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(450, 384 - 32, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(544, 384, 32, 32, ID.CollisionBox, handler));
-			handler.addObject(new Collisions(544, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				removeCollisions();
+				handler.addObject(new Collisions(0, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(0, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(96, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(96, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(256, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(256, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(352, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(352, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(450, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(450, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(544, 384, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(544, 384 - 32, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(248, 75, 16, 48, ID.CollisionBox, handler));
+			}
+			if (currentMap == Maps.house) {
+				removeCollisions();
+			}
+			if (currentMap == Maps.room) {
+				removeCollisions();
+				handler.addObject(new Collisions(-15, 54, 32, 32, ID.CollisionBox, handler));
+			}
+			addedCollisions = true;
+		}
+	}
+
+	public void removeCollisions() {
+		for (int i = 0; i < handler.object.size(); i++) {
+			GameObject object = handler.object.get(i);
+			if (object.getID() == ID.CollisionBox) {
+				System.out.println("REMOVE");
+				handler.object.remove(object);
+			}
 		}
 	}
 }

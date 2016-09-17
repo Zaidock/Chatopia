@@ -49,6 +49,7 @@ public class Player extends GameObject {
 				game.currentMap = Maps.house;
 				handler.removeObject(this);
 				handler.addObject(new Player(241, 54, ID.Player, handler, game));
+				game.addedCollisions = false;
 			}
 		}
 
@@ -64,6 +65,7 @@ public class Player extends GameObject {
 				game.currentMap = Maps.castleWall;
 				handler.removeObject(this);
 				handler.addObject(new Player(1, 233, ID.Player, handler, game));
+				game.addedCollisions = false;
 			}
 		}
 

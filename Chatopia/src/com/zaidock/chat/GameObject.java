@@ -1,7 +1,6 @@
 package com.zaidock.chat;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public abstract class GameObject {
@@ -62,23 +61,5 @@ public abstract class GameObject {
 
 	public int getVelY() {
 		return (int) velY;
-	}
-
-	public void jump(int height) {
-		for (int i = 0; i > height; i++) {
-			height++;
-			setY(getY() + height);
-		}
-
-		for (int i = 0; i < height; i++) {
-			height--;
-			setY(getY() - height);
-		}
-	}
-
-	public void showHitBox(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.draw(getBounds());
-		showingHitBoxes = true;
 	}
 }

@@ -15,14 +15,14 @@ public class Speech extends GameObject {
 
 	private String text;
 
-	private int time;
+	private double time;
 
 	private Chatopia game;
 	private Handler handler;
 
 	private int timer = 0;
 
-	public Speech(float x, float y, ID id, String text, int time, Handler handler, Chatopia game) {
+	public Speech(float x, float y, ID id, String text, double time, Handler handler, Chatopia game) {
 		super(x, y, id);
 		this.text = text;
 		this.time = time;

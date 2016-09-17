@@ -14,8 +14,8 @@ public class Time {
 	}
 
 	int seconds = 0;
-	int minutes = 0;
-	int hours = 0;
+	int minutes = 30;
+	int hours = 10;
 
 	String time;
 

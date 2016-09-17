@@ -25,7 +25,7 @@ public class BackGround {
 				background = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
 			}
 			if(game.currentMap == Maps.castleWall){
-				background = ImageIO.read(getClass().getResourceAsStream("/maps/currentMaps.png"));
+				background = ImageIO.read(getClass().getResourceAsStream("/maps/castleWall.bmp"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
