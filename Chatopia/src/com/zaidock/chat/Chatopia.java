@@ -30,7 +30,8 @@ public class Chatopia extends Canvas implements Runnable {
 
 	public boolean showfps = false;
 	public boolean addedCollisions = false;
-
+	public boolean showCollisions = false;
+	
 	BufferedImage room, castleWall, CastleWallAccsesorys, house;
 
 	public enum State {

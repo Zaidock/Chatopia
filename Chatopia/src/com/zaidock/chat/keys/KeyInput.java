@@ -49,7 +49,12 @@ public class KeyInput extends KeyAdapter {
 						else if(game.showfps == true){
 							game.showfps = false;
 						}
-						
+					if (key == KeyEvent.VK_F4)	{
+						if(game.showCollisions == false)
+						game.showCollisions = true;
+						else if(game.showCollisions)
+						game.showCollisions = false;
+						}
 					}
 				}
 			}
