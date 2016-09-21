@@ -44,28 +44,27 @@ public class KeyInput extends KeyAdapter {
 						System.out.println(tempObject.getX() + "," + tempObject.getY());
 					}
 					if (key == KeyEvent.VK_F3) {
-						if(game.showfps == false)
-						game.showfps = true;
-						else if(game.showfps == true){
+						if (game.showfps == false)
+							game.showfps = true;
+						else if (game.showfps == true) {
 							game.showfps = false;
-						}
-					if (key == KeyEvent.VK_F4)	{
-						if(game.showCollisions == false)
-						game.showCollisions = true;
-						else if(game.showCollisions)
-						game.showCollisions = false;
 						}
 					}
 				}
 			}
 		}
 
-		if (key == KeyEvent.VK_ESCAPE){
-			if(game.gameState == State.Game)
-			game.gameState = State.paused;
-			else if(game.gameState == State.paused){
+		if (key == KeyEvent.VK_ESCAPE) {
+			if (game.gameState == State.Game)
+				game.gameState = State.paused;
+			else if (game.gameState == State.paused) {
 				game.gameState = State.Game;
 			}
+		}	if (key == KeyEvent.VK_F4) {
+			if (game.showCollisions == false)
+				game.showCollisions = true;
+			else if (game.showCollisions)
+				game.showCollisions = false;
 		}
 	}
 

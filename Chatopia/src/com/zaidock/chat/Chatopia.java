@@ -175,26 +175,26 @@ public class Chatopia extends Canvas implements Runnable {
 		if (addedCollisions == false) {
 		if (currentMap == Maps.castleWall) {
 				removeCollisions();
-				handler.addObject(new Collisions(0, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(0, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(96, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(96, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(256, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(256, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(352, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(352, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(450, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(450, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(544, 384, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(544, 384 - 32, 32, 32, ID.CollisionBox, handler));
-				handler.addObject(new Collisions(248, 75, 16, 48, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(0, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(0, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(96, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(96, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(256, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(256, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(352, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(352, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(450, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(450, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(544, 384, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(544, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(248, 75, 16, 48, ID.CollisionBox, handler, this));
 			}
 			if (currentMap == Maps.house) {
 				removeCollisions();
 			}
 			if (currentMap == Maps.room) {
 				removeCollisions();
-				handler.addObject(new Collisions(-15, 54, 32, 32, ID.CollisionBox, handler));
+				handler.addObject(new Collisions(-15, 54, 32, 32, ID.CollisionBox, handler, this));
 			}
 			addedCollisions = true;
 		}
