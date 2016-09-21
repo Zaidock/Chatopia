@@ -29,7 +29,11 @@ public class Player extends GameObject{
 		super(x, y, id);
 		this.handler = handler;
 		this.game = game;
-	
+		try {
+			playerStill = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-00-02.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void tick() {
@@ -51,8 +55,6 @@ public class Player extends GameObject{
 				handler.addObject(new Player(241, 54, ID.Player, handler, game));
 				game.addedCollisions = false;
 			}
-			
-			
 		}
 
 		if (game.currentMap == Maps.castleWall) {
