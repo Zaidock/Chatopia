@@ -13,24 +13,21 @@ import com.zaidock.chat.ID;
 import com.zaidock.chat.objects.other.Speech;
 import com.zaidock.chat.utills.Handler;
 
-public class Player extends GameObject{
+public class Player extends GameObject {
 
-	private BufferedImage playerStill;
-	public BufferedImage playerUp1;
-	public BufferedImage playerUp2;
-	public BufferedImage playerUp3;
-
-
+	private BufferedImage player;
 
 	private Handler handler;
 	private Chatopia game;
+
+	int time = 0;
 
 	public Player(float x, float y, ID id, Handler handler, Chatopia game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.game = game;
 		try {
-			playerStill = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-00-02.png"));
+			player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-00-02.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,6 +52,107 @@ public class Player extends GameObject{
 				handler.addObject(new Player(241, 54, ID.Player, handler, game));
 				game.addedCollisions = false;
 			}
+			if (game.walkingDown) {
+				time++;
+				if (time == 20) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-02.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 40) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-02.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 60) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-02.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					time = 0;
+				}
+			}
+			if (game.walkingUp) {
+				time++;
+				if (time == 20) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-00.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 40) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-00.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 60) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-00.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					time = 0;
+				}
+			}
+			if (game.walkingLeft) {
+				time++;
+				if (time == 20) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-01.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 40) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-01.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 60) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-01.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					time = 0;
+				}
+			}
+			if (game.walkingRight) {
+				time++;
+				if (time == 20) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-03.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 40) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-03.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				if (time == 60) {
+					try {
+						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-03.png"));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					time = 0;
+				}
+			}
+
 		}
 
 		if (game.currentMap == Maps.castleWall) {
@@ -63,9 +161,9 @@ public class Player extends GameObject{
 						"I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
 			}
 		}
-		
-		if(game.currentMap == Maps.house){
-			if(getY() > 146 && getY() < 218 && getX() == 592){
+
+		if (game.currentMap == Maps.house) {
+			if (getY() > 146 && getY() < 218 && getX() == 592) {
 				game.currentMap = Maps.castleWall;
 				handler.removeObject(this);
 				handler.addObject(new Player(1, 233, ID.Player, handler, game));
@@ -91,7 +189,7 @@ public class Player extends GameObject{
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(playerStill, (int) x, (int) y, 64, 64, null);
+		g.drawImage(player, (int) x, (int) y, 64, 64, null);
 		// g.setColor(Color.red);
 		// g.fillRect((int) x, (int) y, 32, 32);
 	}
@@ -103,4 +201,5 @@ public class Player extends GameObject{
 	public void removePlayer() {
 		handler.removeObject(this);
 	}
+
 }

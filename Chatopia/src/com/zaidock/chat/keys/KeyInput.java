@@ -1,6 +1,5 @@
 package com.zaidock.chat.keys;
 
-import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -14,7 +13,6 @@ public class KeyInput extends KeyAdapter {
 
 	private Handler handler;
 	private Chatopia game;
-	Graphics g;
 
 	public KeyInput(Handler handler, Chatopia game) {
 		this.handler = handler;
@@ -29,15 +27,19 @@ public class KeyInput extends KeyAdapter {
 				if (game.gameState == State.Game) {
 					if (key == KeyEvent.VK_W) {
 						tempObject.setVelY(-2);
+						game.walkingUp = true;
 					}
 					if (key == KeyEvent.VK_S) {
 						tempObject.setVelY(2);
+						game.walkingDown = true;
 					}
 					if (key == KeyEvent.VK_A) {
 						tempObject.setVelX(-2);
+						game.walkingLeft = true;
 					}
 					if (key == KeyEvent.VK_D) {
 						tempObject.setVelX(2);
+						game.walkingRight = true;
 					}
 
 					if (key == KeyEvent.VK_P) {
@@ -73,14 +75,22 @@ public class KeyInput extends KeyAdapter {
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 			if (tempObject.getID() == ID.Player) {
-				if (key == KeyEvent.VK_W)
+				if (key == KeyEvent.VK_W){
 					tempObject.setVelY(0);
-				if (key == KeyEvent.VK_S)
+					game.walkingUp = false;
+				}
+				if (key == KeyEvent.VK_S){
 					tempObject.setVelY(0);
-				if (key == KeyEvent.VK_A)
+					game.walkingDown = false;
+				}
+				if (key == KeyEvent.VK_A){
 					tempObject.setVelX(0);
-				if (key == KeyEvent.VK_D)
+					game.walkingLeft = false;
+				}
+				if (key == KeyEvent.VK_D){
 					tempObject.setVelX(0);
+					game.walkingRight = false;
+				}
 			}
 		}
 	}
