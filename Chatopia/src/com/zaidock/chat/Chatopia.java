@@ -8,10 +8,12 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import com.zaidock.chat.Menu.Menu;
+import com.zaidock.chat.gui.Inventory;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
 import com.zaidock.chat.objects.entitys.Player;
 import com.zaidock.chat.objects.other.Speech;
+import com.zaidock.chat.utills.GUI;
 import com.zaidock.chat.utills.Handler;
 
 public class Chatopia extends Canvas implements Runnable {
@@ -31,12 +33,23 @@ public class Chatopia extends Canvas implements Runnable {
 	public boolean showfps = false;
 	public boolean addedCollisions = false;
 	public boolean showCollisions = false;
-	
+	public boolean inventoryOpened = false;
+
 	public boolean walkingUp = false;
 	public boolean walkingDown = false;
 	public boolean walkingLeft = false;
 	public boolean walkingRight = false;
-	
+
+	public int slot0 = 22;
+	public int slot1 = 22 + 48;
+	public int slot2 = 22 + 48 * 2;
+	public int slot3 = 22 + 48 * 3;
+	public int slot4 = 22 + 48 * 4;
+	public int slot5 = 22 + 48 * 5;
+	public int slot6 = 22 + 48 * 6;
+	public int slot7 = 22 + 48 * 7;
+	public int slot8 = 22 + 48 * 8;
+
 	BufferedImage room, castleWall, CastleWallAccsesorys, house;
 
 	public enum State {
@@ -45,6 +58,10 @@ public class Chatopia extends Canvas implements Runnable {
 
 	public enum Maps {
 		room, kichen, house, castleWall, dengeon
+	};
+	
+	public enum Slot {
+		slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8 
 	};
 
 	public State gameState = State.Menu;
@@ -136,7 +153,7 @@ public class Chatopia extends Canvas implements Runnable {
 		} else if (gameState == State.Menu) {
 			menu.tick();
 		}
-		if(addedCollisions == false)
+		if (addedCollisions == false)
 			addCollisions();
 	}
 
@@ -178,7 +195,7 @@ public class Chatopia extends Canvas implements Runnable {
 
 	public void addCollisions() {
 		if (addedCollisions == false) {
-		if (currentMap == Maps.castleWall) {
+			if (currentMap == Maps.castleWall) {
 				removeCollisions();
 				handler.addObject(new Collisions(0, 384, 32, 32, ID.CollisionBox, handler, this));
 				handler.addObject(new Collisions(0, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
@@ -213,5 +230,17 @@ public class Chatopia extends Canvas implements Runnable {
 				handler.object.remove(object);
 			}
 		}
+	}
+
+	public void closeInventory() {
+		for (int i = 0; i < handler.gui.size(); i++) {
+			GUI gui = handler.gui.get(i);
+			handler.removeGUI(gui);
+			inventoryOpened = false;
+		}
+	}
+
+	public Inventory getInventory() {
+		return new Inventory(ID.Inventory, handler);
 	}
 }

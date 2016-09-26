@@ -41,6 +41,15 @@ public class KeyInput extends KeyAdapter {
 						tempObject.setVelX(2);
 						game.walkingRight = true;
 					}
+					
+					if(key == KeyEvent.VK_I){
+						if(game.inventoryOpened == false){
+							handler.addGUI(game.getInventory());
+							game.inventoryOpened = true;
+						}else if(game.inventoryOpened){
+							game.closeInventory();
+						}
+					}
 
 					if (key == KeyEvent.VK_P) {
 						System.out.println(tempObject.getX() + "," + tempObject.getY());

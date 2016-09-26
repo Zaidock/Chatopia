@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 import com.zaidock.chat.Chatopia;
 import com.zaidock.chat.Chatopia.Maps;
+import com.zaidock.chat.Chatopia.Slot;
+import com.zaidock.chat.items.SackOfMoney;
 import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.objects.other.Speech;
@@ -44,123 +46,7 @@ public class Player extends GameObject {
 			setY(426 - 33);
 		if (getY() < 55)
 			setY(55 - 1);
-
-		if (game.currentMap == Maps.room) {
-			if (getX() > 463 && getX() < 493 && getY() <= 54) {
-				game.currentMap = Maps.house;
-				handler.removeObject(this);
-				handler.addObject(new Player(241, 54, ID.Player, handler, game));
-				game.addedCollisions = false;
-			}
-			if (game.walkingDown) {
-				time++;
-				if (time == 20) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-02.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 40) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-02.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 60) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-02.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					time = 0;
-				}
-			}
-			if (game.walkingUp) {
-				time++;
-				if (time == 20) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-00.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 40) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-00.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 60) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-00.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					time = 0;
-				}
-			}
-			if (game.walkingLeft) {
-				time++;
-				if (time == 20) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-01.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 40) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-01.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 60) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-01.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					time = 0;
-				}
-			}
-			if (game.walkingRight) {
-				time++;
-				if (time == 20) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-03.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 40) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-03.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				if (time == 60) {
-					try {
-						player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-03.png"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					time = 0;
-				}
-			}
-
-		}
-
-		if (game.currentMap == Maps.castleWall) {
-			if (getX() > 139 && getX() < 217 && getY() == 81) {
-				handler.addObject(new Speech(15, Chatopia.HEIGHT, ID.speech,
-						"I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
-			}
-		}
+		walk();
 
 		if (game.currentMap == Maps.house) {
 			if (getY() > 146 && getY() < 218 && getX() == 592) {
@@ -171,7 +57,125 @@ public class Player extends GameObject {
 			}
 		}
 
+		if (game.currentMap == Maps.room) {
+			if (getX() > 463 && getX() < 493 && getY() <= 54) {
+				game.currentMap = Maps.house;
+				handler.removeObject(this);
+				handler.addObject(new Player(241, 54, ID.Player, handler, game));
+				game.addedCollisions = false;
+			}
+		}
+
+		if (game.currentMap == Maps.castleWall) {
+			if (getX() > 139 && getX() < 217 && getY() == 81) {
+				handler.addObject(new Speech(15, Chatopia.HEIGHT, ID.speech,
+						"I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
+			}
+		}
 		collision();
+	}
+
+	public void walk() {
+		if (game.walkingDown) {
+			time++;
+			if (time == 20) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-02.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 40) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-02.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 60) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-02.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				time = 0;
+			}
+		}
+		if (game.walkingUp) {
+			time++;
+			if (time == 20) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-00.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 40) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-00.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 60) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-00.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				time = 0;
+			}
+		}
+		if (game.walkingLeft) {
+			time++;
+			if (time == 20) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-01.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 40) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-01.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 60) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-01.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				time = 0;
+			}
+		}
+		if (game.walkingRight) {
+			time++;
+			if (time == 20) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-01-03.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 40) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-02-03.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (time == 60) {
+				try {
+					player = ImageIO.read(getClass().getResourceAsStream("/characters/soldier_altcolor-03-03.png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				time = 0;
+			}
+		}
 	}
 
 	public void collision() {

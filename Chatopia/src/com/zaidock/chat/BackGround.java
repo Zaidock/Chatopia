@@ -11,6 +11,7 @@ public class BackGround {
 	private Chatopia game;
 
 	private BufferedImage background;
+	private BufferedImage other;
 
 	public BackGround(Chatopia game) {
 		this.game = game;
@@ -26,6 +27,7 @@ public class BackGround {
 			}
 			if(game.currentMap == Maps.castleWall){
 				background = ImageIO.read(getClass().getResourceAsStream("/maps/castleWall.bmp"));
+				other = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,5 +36,9 @@ public class BackGround {
 
 	public void render(Graphics g) {
 		g.drawImage(background, 0, 0, null);
+	}
+	
+	public void renderOther(Graphics g){
+		g.drawImage(other, 0, 0, null);
 	}
 }

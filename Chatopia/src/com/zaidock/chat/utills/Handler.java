@@ -3,6 +3,7 @@ package com.zaidock.chat.utills;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import com.zaidock.chat.BackGround;
 import com.zaidock.chat.GameObject;
 
 public class Handler {
@@ -10,7 +11,7 @@ public class Handler {
 	public LinkedList<GUI> gui = new LinkedList<GUI>();
 	public LinkedList<GameItem> item = new LinkedList<GameItem>();
 	public LinkedList<GameObject> object = new LinkedList<GameObject>();
-
+	
 	public void tick() {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
@@ -33,13 +34,13 @@ public class Handler {
 
 			tempObject.render(g);
 		}
-		for (int i = 0; i < item.size(); i++) {
-			GameItem tempItem = item.get(i);
-			tempItem.render(g);
-		}
 		for (int i = 0; i < gui.size(); i++) {
 			GUI tempGUI = gui.get(i);
 			tempGUI.render(g);
+		}
+		for (int i = 0; i < item.size(); i++) {
+			GameItem tempItem = item.get(i);
+			tempItem.render(g);
 		}
 	}
 
@@ -53,6 +54,7 @@ public class Handler {
 	
 	public void addItem(GameItem item) {
 		this.item.add(item);
+		System.out.println("added Item");
 	}
 
 	public void removeItem(GameItem item) {
