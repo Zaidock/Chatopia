@@ -6,8 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.zaidock.chat.Chatopia;
-import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
 
 public class Collisions extends GameObject {

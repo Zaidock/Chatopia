@@ -8,16 +8,18 @@ import javax.imageio.ImageIO;
 
 import com.zaidock.chat.Chatopia;
 import com.zaidock.chat.Chatopia.Maps;
-import com.zaidock.chat.Chatopia.Slot;
-import com.zaidock.chat.items.SackOfMoney;
-import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.objects.other.Speech;
+import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
+import com.zaidock.chat.utills.Item;
 
 public class Player extends GameObject {
 
 	private BufferedImage player;
+	private BufferedImage helmet;
+	private BufferedImage chest;
+	private BufferedImage leggings;
 
 	private Handler handler;
 	private Chatopia game;
@@ -67,9 +69,22 @@ public class Player extends GameObject {
 		}
 
 		if (game.currentMap == Maps.castleWall) {
-			if (getX() > 139 && getX() < 217 && getY() == 81) {
+			if (getX() > 139 && getX() < 233 && getY() == 81) {
+				for (int i = 0; i < handler.item.size(); i++) {
+					Item item = handler.item.get(i);
+					if (item.getID() == ID.SackOfMoney) {
+						game.currentMap = Maps.dengeon;
+						return;
+					}
+				}
 				handler.addObject(new Speech(15, Chatopia.HEIGHT, ID.speech,
 						"I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
+			}
+			if (getY() > 247 && getY() < 275 && getX() >= 592) {
+				game.currentMap = Maps.richsHouse;
+				handler.removeObject(this);
+				handler.addObject(new Player(1, 233, ID.Player, handler, game));
+				game.addedCollisions = false;
 			}
 		}
 		collision();
@@ -183,10 +198,8 @@ public class Player extends GameObject {
 			GameObject tempObject = handler.object.get(i);
 			if (tempObject.getID() == ID.CollisionBox || tempObject.getID() == ID.Guard) {
 				if (getBounds().intersects(tempObject.getBounds())) {
-					if (tempObject.getID() == ID.CollisionBox || tempObject.getID() == ID.Guard) {
-						setVelX(0);
-						setVelY(0);
-					}
+					setVelX(0);
+					setVelY(0);
 				}
 			}
 		}
@@ -194,8 +207,11 @@ public class Player extends GameObject {
 
 	public void render(Graphics g) {
 		g.drawImage(player, (int) x, (int) y, 64, 64, null);
-		// g.setColor(Color.red);
-		// g.fillRect((int) x, (int) y, 32, 32);
+		g.drawImage(helmet, (int) x, (int) y, null);
+		g.drawImage(chest, (int) x, (int) y, null);
+		g.drawImage(leggings, (int) x, (int) y, null);
+		// g.setColor(Color.RED);
+		// g.fillRect((int)x, (int)y, 32, 32);
 	}
 
 	public Rectangle getBounds() {

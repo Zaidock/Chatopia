@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 
 import com.zaidock.chat.Chatopia;
 import com.zaidock.chat.Chatopia.State;
-import com.zaidock.chat.GameObject;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
 
 public class KeyInput extends KeyAdapter {

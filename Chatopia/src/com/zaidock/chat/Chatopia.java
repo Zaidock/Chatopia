@@ -8,12 +8,14 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import com.zaidock.chat.Menu.Menu;
+import com.zaidock.chat.blocks.Stone;
 import com.zaidock.chat.gui.Inventory;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
 import com.zaidock.chat.objects.entitys.Player;
 import com.zaidock.chat.objects.other.Speech;
 import com.zaidock.chat.utills.GUI;
+import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
 
 public class Chatopia extends Canvas implements Runnable {
@@ -50,22 +52,22 @@ public class Chatopia extends Canvas implements Runnable {
 	public int slot7 = 22 + 48 * 7;
 	public int slot8 = 22 + 48 * 8;
 
-	BufferedImage room, castleWall, CastleWallAccsesorys, house;
+	BufferedImage room, castleWall, CastleWallAccsesorys, house, richsHouse;
 
 	public enum State {
 		Menu, Game, paused
 	};
 
 	public enum Maps {
-		room, kichen, house, castleWall, dengeon
+		room, kichen, house, castleWall, dengeon, richsHouse
 	};
-	
+
 	public enum Slot {
-		slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8 
+		slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8
 	};
 
 	public State gameState = State.Menu;
-	public Maps currentMap = Maps.room;
+	public Maps currentMap = Maps.richsHouse;
 
 	public Chatopia() {
 
@@ -81,6 +83,7 @@ public class Chatopia extends Canvas implements Runnable {
 			CastleWallAccsesorys = ImageIO.read(getClass().getResourceAsStream("/maps/CastleWallTrees.png"));
 			room = ImageIO.read(getClass().getResourceAsStream("/maps/room.png"));
 			house = ImageIO.read(getClass().getResourceAsStream("/maps/house.png"));
+			richsHouse = ImageIO.read(getClass().getResourceAsStream("/maps/Rich's House.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -185,6 +188,11 @@ public class Chatopia extends Canvas implements Runnable {
 					g.drawImage(house, 0, 0, null);
 					handler.render(g);
 				}
+				if (currentMap == Maps.richsHouse) {
+					hud.render(g);
+					g.drawImage(richsHouse, 0, 0, null);
+					handler.render(g);
+				}
 			}
 		} else if (gameState == State.Menu) {
 			menu.render(g);
@@ -194,6 +202,10 @@ public class Chatopia extends Canvas implements Runnable {
 	}
 
 	public void addCollisions() {
+		removeCollisions();
+		removeCollisions();
+		removeCollisions();
+
 		if (addedCollisions == false) {
 			if (currentMap == Maps.castleWall) {
 				removeCollisions();
@@ -210,15 +222,29 @@ public class Chatopia extends Canvas implements Runnable {
 				handler.addObject(new Collisions(544, 384, 32, 32, ID.CollisionBox, handler, this));
 				handler.addObject(new Collisions(544, 384 - 32, 32, 32, ID.CollisionBox, handler, this));
 				handler.addObject(new Collisions(248, 75, 16, 48, ID.CollisionBox, handler, this));
+				addedCollisions = true;
 			}
 			if (currentMap == Maps.house) {
 				removeCollisions();
+				addedCollisions = true;
 			}
 			if (currentMap == Maps.room) {
 				removeCollisions();
 				handler.addObject(new Collisions(-15, 54, 32, 32, ID.CollisionBox, handler, this));
+				addedCollisions = true;
 			}
-			addedCollisions = true;
+			if (currentMap == Maps.richsHouse) {
+				removeCollisions();
+				handler.addObject(new Collisions(353, 321, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(513, 351, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(65, 381, 32, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(541, 225, 32, 96, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(541, 225, 32, 96, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(575, 285, 64, 32, ID.CollisionBox, handler, this));
+				handler.addObject(new Collisions(574, 225, 64, 32, ID.CollisionBox, handler, this));
+				handler.addBlock(new Stone(80, 325, ID.Stone));
+				addedCollisions = true;
+			}
 		}
 	}
 
@@ -235,8 +261,10 @@ public class Chatopia extends Canvas implements Runnable {
 	public void closeInventory() {
 		for (int i = 0; i < handler.gui.size(); i++) {
 			GUI gui = handler.gui.get(i);
-			handler.removeGUI(gui);
-			inventoryOpened = false;
+			if (gui.getID() == ID.Inventory) {
+				handler.removeGUI(gui);
+				inventoryOpened = false;
+			}
 		}
 	}
 

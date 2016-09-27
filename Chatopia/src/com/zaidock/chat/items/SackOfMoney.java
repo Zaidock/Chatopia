@@ -8,9 +8,9 @@ import javax.imageio.ImageIO;
 import com.zaidock.chat.Chatopia;
 import com.zaidock.chat.Chatopia.Slot;
 import com.zaidock.chat.ID;
-import com.zaidock.chat.utills.GameItem;
+import com.zaidock.chat.utills.Item;
 
-public class SackOfMoney extends GameItem {
+public class SackOfMoney extends Item {
 
 	BufferedImage sackofcoins;
 
@@ -30,8 +30,6 @@ public class SackOfMoney extends GameItem {
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

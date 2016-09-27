@@ -5,12 +5,12 @@ import java.awt.Graphics;
 import com.zaidock.chat.Chatopia.Slot;
 import com.zaidock.chat.ID;
 
-public abstract class GameItem {
+public abstract class Item {
 
 	protected ID id;
 	protected Slot slot;
 	
-	public GameItem(ID id, Slot slot) {
+	public Item(ID id, Slot slot) {
 		this.id = id;
 		this.slot = slot;
 	}
