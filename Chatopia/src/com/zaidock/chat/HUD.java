@@ -15,11 +15,11 @@ public class HUD {
 	
 	public void render(Graphics g){
 		g.setColor(Color.gray);
-		g.fillRect(Chatopia.WIDTH / 2 - 100, 15, 200, 32);
+		g.fillRect(Game.WIDTH / 2 - 100, 15, 200, 32);
 		g.setColor(Color.green);
-		g.fillRect(Chatopia.WIDTH / 2 - 100, 15, health * 2, 32);
+		g.fillRect(Game.WIDTH / 2 - 100, 15, health * 2, 32);
 		g.setColor(Color.white);
-		g.drawRect(Chatopia.WIDTH / 2 - 100, 15, 200, 32);
+		g.drawRect(Game.WIDTH / 2 - 100, 15, 200, 32);
 	}
 	
 	public int getHealth(){

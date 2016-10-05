@@ -5,15 +5,15 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.zaidock.chat.Chatopia.Maps;
+import com.zaidock.chat.Game.Maps;
 
 public class BackGround {
-	private Chatopia game;
+	private Game game;
 
 	private BufferedImage background;
 	private BufferedImage other;
 
-	public BackGround(Chatopia game) {
+	public BackGround(Game game) {
 		this.game = game;
 	}
 

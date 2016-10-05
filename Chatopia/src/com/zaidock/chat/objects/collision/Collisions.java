@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.zaidock.chat.Chatopia;
+import com.zaidock.chat.Game;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
@@ -16,9 +16,9 @@ public class Collisions extends GameObject {
 
 	private int width, height;
 
-	private Chatopia game;
+	private Game game;
 
-	public Collisions(float x, float y, int width, int height, ID id, Handler handler, Chatopia game) {
+	public Collisions(float x, float y, int width, int height, ID id, Handler handler, Game game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.width = width;

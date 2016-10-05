@@ -1,12 +1,12 @@
 package com.zaidock.chat;
 
-import com.zaidock.chat.Chatopia.State;
+import com.zaidock.chat.Game.State;
 
 public class Time {
 
-	private Chatopia game;
+	private Game game;
 
-	public Time(Chatopia game) {
+	public Time(Game game) {
 		this.game = game;
 	}
 

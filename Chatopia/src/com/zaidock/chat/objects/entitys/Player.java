@@ -6,10 +6,11 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.zaidock.chat.Chatopia;
-import com.zaidock.chat.Chatopia.Maps;
+import com.zaidock.chat.Game;
+import com.zaidock.chat.Game.Maps;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.objects.other.Speech;
+import com.zaidock.chat.quests.GetIntoDungeon;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
 import com.zaidock.chat.utills.Item;
@@ -22,11 +23,11 @@ public class Player extends GameObject {
 	private BufferedImage leggings;
 
 	private Handler handler;
-	private Chatopia game;
+	private Game game;
 
 	int time = 0;
 
-	public Player(float x, float y, ID id, Handler handler, Chatopia game) {
+	public Player(float x, float y, ID id, Handler handler, Game game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.game = game;
@@ -77,14 +78,23 @@ public class Player extends GameObject {
 						return;
 					}
 				}
-				handler.addObject(new Speech(15, Chatopia.HEIGHT, ID.speech,
-						"I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
+				handler.addObject(new Speech(15, Game.HEIGHT, ID.speech,
+						"Guard: I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
+				game.getConfig().set("checkpoint", "1");
+				
+				handler.addQuest(new GetIntoDungeon(game, handler));
+				
 			}
 			if (getY() > 247 && getY() < 275 && getX() >= 592) {
 				game.currentMap = Maps.richsHouse;
 				handler.removeObject(this);
 				handler.addObject(new Player(1, 233, ID.Player, handler, game));
 				game.addedCollisions = false;
+			}
+		}
+		if(game.currentMap == Maps.richsHouse){
+			if(getX() > 297 && getX() < 313 && getY() == 54){
+				handler.addObject(new Speech(15, Game.HEIGHT, ID.speech, "YOU: *Knock* *Knock*", 10, handler, game));
 			}
 		}
 		collision();

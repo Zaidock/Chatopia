@@ -3,8 +3,8 @@ package com.zaidock.chat.keys;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import com.zaidock.chat.Chatopia;
-import com.zaidock.chat.Chatopia.State;
+import com.zaidock.chat.Game;
+import com.zaidock.chat.Game.State;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
@@ -12,9 +12,9 @@ import com.zaidock.chat.utills.Handler;
 public class KeyInput extends KeyAdapter {
 
 	private Handler handler;
-	private Chatopia game;
+	private Game game;
 
-	public KeyInput(Handler handler, Chatopia game) {
+	public KeyInput(Handler handler, Game game) {
 		this.handler = handler;
 		this.game = game;
 	}

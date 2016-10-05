@@ -6,15 +6,15 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import com.zaidock.chat.Chatopia;
-import com.zaidock.chat.Chatopia.State;
+import com.zaidock.chat.Game;
+import com.zaidock.chat.Game.State;
 
 public class Menu extends MouseAdapter{
 	
-	private Chatopia game;
+	private Game game;
 	
 	
-	public Menu(Chatopia game) {
+	public Menu(Game game) {
 		this.game = game;
 	}
 	
@@ -44,13 +44,13 @@ public class Menu extends MouseAdapter{
 	public void render(Graphics g){
 		Font fnt = new Font("arial", 1, 50);
 		Font bntFnt = new Font("arial", 1, 20);
-
+		Font versionFnt = new Font("arial", 1, 15);
 		
 		g.setFont(fnt);
 		
 		g.setColor(Color.black);
 		
-		g.fillRect(0, 0, Chatopia.WIDTH, Chatopia.HEIGHT);
+		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		
 		g.setColor(Color.WHITE);
 		g.drawString("Chatopia", 200, 50);
@@ -59,6 +59,8 @@ public class Menu extends MouseAdapter{
 		g.drawString("Play", 285, 190);
 		g.drawString("Options", 272, 190 + 100);
 		g.drawString("Exit", 290, 390);
+		g.setFont(versionFnt);
+		g.drawString("Version: " + game.version, 15, Game.HEIGHT - 30);
 
 		g.drawRect(210, 150, 200, 64);
 		

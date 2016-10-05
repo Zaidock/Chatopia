@@ -2,7 +2,7 @@ package com.zaidock.chat.utills;
 
 import java.awt.Graphics;
 
-import com.zaidock.chat.Chatopia.Slot;
+import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
 
 public abstract class Item {

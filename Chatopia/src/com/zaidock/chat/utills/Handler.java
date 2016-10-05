@@ -9,6 +9,7 @@ public class Handler {
 	public LinkedList<Item> item = new LinkedList<Item>();
 	public LinkedList<Block> block = new LinkedList<Block>();
 	public LinkedList<GameObject> object = new LinkedList<GameObject>();
+	public LinkedList<Quests> quests = new LinkedList<Quests>();
 
 	public void tick() {
 		for (int i = 0; i < object.size(); i++) {
@@ -27,6 +28,11 @@ public class Handler {
 		for (int i = 0; i < gui.size(); i++) {
 			GUI tempGUI = gui.get(i);
 			tempGUI.tick();
+		}
+		for(int i = 0; i < quests.size(); i++){
+			Quests quest = quests.get(i);
+			quest.tick();
+			quest.isComplete();
 		}
 	}
 
@@ -47,6 +53,10 @@ public class Handler {
 		for (int i = 0; i < item.size(); i++) {
 			Item tempItem = item.get(i);
 			tempItem.render(g);
+		}
+		for (int i = 0; i < quests.size(); i++) {
+			Quests quest = quests.get(i);
+			quest.render(g);
 		}
 	}
 
@@ -80,5 +90,13 @@ public class Handler {
 
 	public void removeBlock() {
 		this.block.remove(block);
+	}
+
+	public void addQuest(Quests quest) {
+		this.quests.add(quest);
+	}
+
+	public void removeQuest(Quests quest) {
+		this.quests.remove(quest);
 	}
 }

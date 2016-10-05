@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.zaidock.chat.Chatopia;
-import com.zaidock.chat.Chatopia.Slot;
+import com.zaidock.chat.Game;
+import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.Item;
 
@@ -14,10 +14,10 @@ public class SackOfMoney extends Item {
 
 	BufferedImage sackofcoins;
 
-	private Chatopia game;
+	private Game game;
 	private Slot slot;
 
-	public SackOfMoney(ID id, Chatopia game, Slot slot) {
+	public SackOfMoney(ID id, Game game, Slot slot) {
 		super(id, slot);
 		try {
 			sackofcoins = ImageIO.read(getClass().getResourceAsStream("/items/SackOfMoney.jpeg"));
