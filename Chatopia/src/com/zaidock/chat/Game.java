@@ -145,7 +145,7 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				// System.out.println("FPS: " + frames);
+				 System.out.println("FPS: " + frames);
 				if (showfps && !(gameState == State.paused))
 					handler.addObject(new Speech(15, 15, ID.speech, "FPS: " + frames, 1, handler, this));
 				frames = 0;
