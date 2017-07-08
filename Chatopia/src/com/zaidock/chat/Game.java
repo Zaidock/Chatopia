@@ -75,6 +75,9 @@ public class Game extends Canvas implements Runnable {
 	public State gameState = State.Menu;
 	public Maps currentMap = Maps.room;
 
+	public Inventory getInventory() {
+		return new Inventory(ID.Inventory, handler);
+	}
 	public Game() {
 
 		this.addKeyListener(new KeyInput(handler, this));
@@ -274,9 +277,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public Inventory getInventory() {
-		return new Inventory(ID.Inventory, handler);
-	}
+
 
 	public Config getConfig() {
 		return new Config();
