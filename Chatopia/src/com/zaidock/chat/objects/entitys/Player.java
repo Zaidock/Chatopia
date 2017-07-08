@@ -13,7 +13,7 @@ import com.zaidock.chat.objects.other.Text;
 import com.zaidock.chat.quests.GetIntoDungeon;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
-import com.zaidock.chat.utills.Item;
+import com.zaidock.chat.utills.Itemref;
 
 public class Player extends GameObject {
 
@@ -72,7 +72,7 @@ public class Player extends GameObject {
 		if (game.currentMap == Maps.castleWall) {
 			if (getX() > 139 && getX() < 233 && getY() == 81) {
 				for (int i = 0; i < handler.item.size(); i++) {
-					Item item = handler.item.get(i);
+					Itemref item = handler.item.get(i);
 					if (item.getID() == ID.SackOfMoney) {
 						game.currentMap = Maps.dengeon;
 						return;

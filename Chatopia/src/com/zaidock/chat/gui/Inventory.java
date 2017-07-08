@@ -7,20 +7,20 @@ import javax.imageio.ImageIO;
 
 import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.GUI;
-import com.zaidock.chat.utills.Item;
+import com.zaidock.chat.utills.Itemref;
 import com.zaidock.chat.utills.Handler;
 
 public class Inventory extends GUI {
 
-	public Item slot0;
-	public Item slot1;
-	public Item slot2;
-	public Item slot3;
-	public Item slot4;
-	public Item slot5;
-	public Item slot6;
-	public Item slot7;
-	public Item slot8;
+	public Itemref slot0;
+	public Itemref slot1;
+	public Itemref slot2;
+	public Itemref slot3;
+	public Itemref slot4;
+	public Itemref slot5;
+	public Itemref slot6;
+	public Itemref slot7;
+	public Itemref slot8;
 
 	BufferedImage slot;
 

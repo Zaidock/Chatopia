@@ -5,12 +5,12 @@ import java.awt.Graphics;
 import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
 
-public abstract class Item {
+public abstract class Itemref {
 
 	protected ID id;
 	protected Slot slot;
 	
-	public Item(ID id, Slot slot) {
+	public Itemref(ID id, Slot slot) {
 		this.id = id;
 		this.slot = slot;
 	}

@@ -1,0 +1,14 @@
+{
+	"itemName" : "moneysack",
+
+	"description" : {
+		"short" : "Sack of money",
+		"long" : "A small sack containing 2000 (currency)"
+	},
+
+	"rarity" : {
+		"rarity" : "Common",
+		"colour" : null,
+		"value" : 2000
+	}
+}

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Handler {
 
 	public LinkedList<GUI> gui = new LinkedList<GUI>();
-	public LinkedList<Item> item = new LinkedList<Item>();
+	public LinkedList<Itemref> item = new LinkedList<Itemref>();
 	public LinkedList<Block> block = new LinkedList<Block>();
 	public LinkedList<GameObject> object = new LinkedList<GameObject>();
 	public LinkedList<Quests> quests = new LinkedList<Quests>();
@@ -22,7 +22,7 @@ public class Handler {
 			tempBlock.tick();
 		}
 		for (int i = 0; i < item.size(); i++) {
-			Item tempItem = item.get(i);
+			Itemref tempItem = item.get(i);
 			tempItem.tick();
 		}
 		for (int i = 0; i < gui.size(); i++) {
@@ -51,7 +51,7 @@ public class Handler {
 			tempBlock.render(g);
 		}
 		for (int i = 0; i < item.size(); i++) {
-			Item tempItem = item.get(i);
+			Itemref tempItem = item.get(i);
 			tempItem.render(g);
 		}
 		for (int i = 0; i < quests.size(); i++) {
@@ -68,11 +68,11 @@ public class Handler {
 		this.object.remove(object);
 	}
 
-	public void addItem(Item item) {
+	public void addItem(Itemref item) {
 		this.item.add(item);
 	}
 
-	public void removeItem(Item item) {
+	public void removeItem(Itemref item) {
 		this.item.remove(item);
 	}
 

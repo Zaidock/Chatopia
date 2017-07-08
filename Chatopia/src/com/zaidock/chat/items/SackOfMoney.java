@@ -8,9 +8,9 @@ import javax.imageio.ImageIO;
 import com.zaidock.chat.Game;
 import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
-import com.zaidock.chat.utills.Item;
+import com.zaidock.chat.utills.Itemref;
 
-public class SackOfMoney extends Item {
+public class SackOfMoney extends Itemref {
 
 	BufferedImage sackofcoins;
 
