@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import com.zaidock.chat.Game;
 import com.zaidock.chat.Game.Maps;
 import com.zaidock.chat.ID;
-import com.zaidock.chat.objects.other.Speech;
+import com.zaidock.chat.objects.other.Text;
 import com.zaidock.chat.quests.GetIntoDungeon;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
@@ -78,7 +78,7 @@ public class Player extends GameObject {
 						return;
 					}
 				}
-				handler.addObject(new Speech(15, Game.HEIGHT, ID.speech,
+				handler.addObject(new Text(15, Game.HEIGHT, ID.speech,
 						"Guard: I can't let you in unless *cough* *cough* you have somthing for me?", 10, handler, game));
 				game.getConfig().set("checkpoint", "1");
 				
@@ -94,7 +94,7 @@ public class Player extends GameObject {
 		}
 		if(game.currentMap == Maps.richsHouse){
 			if(getX() > 297 && getX() < 313 && getY() == 54){
-				handler.addObject(new Speech(15, Game.HEIGHT, ID.speech, "YOU: *Knock* *Knock*", 10, handler, game));
+				handler.addObject(new Text(15, Game.HEIGHT, ID.speech, "YOU: *Knock* *Knock*", 10, handler, game));
 			}
 		}
 		collision();

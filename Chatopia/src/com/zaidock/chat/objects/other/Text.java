@@ -11,7 +11,7 @@ import com.zaidock.chat.ID;
 import com.zaidock.chat.utills.GameObject;
 import com.zaidock.chat.utills.Handler;
 
-public class Speech extends GameObject {
+public class Text extends GameObject {
 
 	private String text;
 
@@ -22,7 +22,7 @@ public class Speech extends GameObject {
 
 	private int timer = 0;
 
-	public Speech(float x, float y, ID id, String text, double time, Handler handler, Game game) {
+	public Text(float x, float y, ID id, String text, double time, Handler handler, Game game) {
 		super(x, y, id);
 		this.text = text;
 		this.time = time;

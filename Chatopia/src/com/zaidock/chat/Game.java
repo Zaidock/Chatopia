@@ -13,7 +13,7 @@ import com.zaidock.chat.gui.Inventory;
 import com.zaidock.chat.keys.KeyInput;
 import com.zaidock.chat.objects.collision.Collisions;
 import com.zaidock.chat.objects.entitys.Player;
-import com.zaidock.chat.objects.other.Speech;
+import com.zaidock.chat.objects.other.Text;
 import com.zaidock.chat.utills.Config;
 import com.zaidock.chat.utills.GUI;
 import com.zaidock.chat.utills.GameObject;
@@ -150,7 +150,7 @@ public class Game extends Canvas implements Runnable {
 				timer += 1000;
 				 System.out.println("FPS: " + frames);
 				if (showfps && !(gameState == State.paused))
-					handler.addObject(new Speech(15, 15, ID.speech, "FPS: " + frames, 1, handler, this));
+					handler.addObject(new Text(15, 15, ID.speech, "FPS: " + frames, 1, handler, this));
 				frames = 0;
 			}
 		}
