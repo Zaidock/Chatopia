@@ -8,6 +8,7 @@ import com.zaidock.chat.ID;
 
 public class Iteminit {
 
+	@SuppressWarnings("unused")
 	private Item item;
 	private String itemname;
 	private Game game;

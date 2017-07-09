@@ -48,21 +48,25 @@ public class Game extends Canvas implements Runnable {
 
 	public String checkpoint;
 
-	public int slot0 = 22;
-	public int slot1 = 22 + 48;
-	public int slot2 = 22 + 48 * 2;
-	public int slot3 = 22 + 48 * 3;
-	public int slot4 = 22 + 48 * 4;
-	public int slot5 = 22 + 48 * 5;
-	public int slot6 = 22 + 48 * 6;
-	public int slot7 = 22 + 48 * 7;
-	public int slot8 = 22 + 48 * 8;
+	public final int slot0 = 22;
+	public final int slot1 = 22 + 48;
+	public final int slot2 = 22 + 48 * 2;
+	public final int slot3 = 22 + 48 * 3;
+	public final int slot4 = 22 + 48 * 4;
+	public final int slot5 = 22 + 48 * 5;
+	public final int slot6 = 22 + 48 * 6;
+	public final int slot7 = 22 + 48 * 7;
+	public final int slot8 = 22 + 48 * 8;
 
 	BufferedImage room, castleWall, CastleWallAccsesorys, house, richsHouse;
 
 	public enum State {
 		Menu, Game, paused
 	};
+	
+	public enum MusicState {
+		worldDay, worldNight, chathub, intromission
+	}
 
 	public enum Maps {
 		room, kichen, house, castleWall, dengeon, richsHouse
