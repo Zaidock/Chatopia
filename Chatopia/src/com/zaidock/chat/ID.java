@@ -6,7 +6,7 @@ public enum ID {
 	
 	Inventory(), 
 	
-	SackOfMoney(),
+	moneysack(),
 	
 	Stone(), Iron()
 
