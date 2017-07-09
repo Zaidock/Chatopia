@@ -73,7 +73,7 @@ public class Player extends GameObject {
 			if (getX() > 139 && getX() < 233 && getY() == 81) {
 				for (int i = 0; i < handler.item.size(); i++) {
 					Itemref item = handler.item.get(i);
-					if (item.getID() == ID.SackOfMoney) {
+					if (item.getID() == ID.moneysack) {
 						game.currentMap = Maps.dengeon;
 						return;
 					}
