@@ -1,14 +1,16 @@
 {
 	"itemName" : "moneysack",
+	"iconImage" : "moneysack.png",
+	"idtype" : "moneysack",
 
 	"description" : {
 		"short" : "Sack of money",
-		"long" : "A small sack containing 2000 (currency)"
+		"long" : "A small sack containing 2000 chits, whatever they are"
 	},
 
 	"rarity" : {
 		"rarity" : "Common",
-		"colour" : null,
+		"colour" : "default",
 		"value" : 2000
 	}
 }

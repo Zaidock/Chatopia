@@ -14,6 +14,8 @@ public class Iteminit {
 	private Game game;
 	private Slot slot;
 	
+	private String id;
+	
 	public void init(){
 		String[] files = new File("src/com/zaidock/chat/items/").list();
 		
@@ -21,7 +23,9 @@ public class Iteminit {
 			itemname = files[i].substring(0, files[i].lastIndexOf("."));
 			
 			if (files[i].substring(files[i].lastIndexOf(".") + 1) == "json"){
-				item = new Item(ID.valueOf(itemname), game, slot, itemname);
+				id = Item.get(itemname, "idtype");
+				
+				item = new Item(ID.valueOf(id), game, slot, itemname);
 			}
 		}
 	}

@@ -1,0 +1,16 @@
+{
+    "itemName" : "portalkey",
+    "iconImage" : "keyportal.png",
+    "idtype" : "portalkey",
+
+    "description" : {
+        "short" : "Portal key",
+        "long" : "A key to a mysterious portal"
+    },
+
+    "rarity" : {
+        "rarity" : "Rare",
+        "colour" : "#c4c419",
+        "value" : 5000
+    }
+}

@@ -65,7 +65,7 @@ public class Game extends Canvas implements Runnable {
 	};
 	
 	public enum MusicState {
-		worldDay, worldNight, chathub, intromission
+		worldDay, worldNight, chathub, introMission
 	}
 
 	public enum Maps {
