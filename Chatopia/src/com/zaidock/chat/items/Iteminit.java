@@ -5,6 +5,7 @@ import java.io.File;
 import com.zaidock.chat.Game;
 import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.JSONTools;
 
 public class Iteminit {
 
@@ -23,7 +24,7 @@ public class Iteminit {
 			itemname = files[i].substring(0, files[i].lastIndexOf("."));
 			
 			if (files[i].substring(files[i].lastIndexOf(".") + 1) == "json"){
-				id = Item.get(itemname, "idtype");
+				id = JSONTools.get(itemname, "idtype");
 				
 				item = new Item(ID.valueOf(id), game, slot, itemname);
 			}

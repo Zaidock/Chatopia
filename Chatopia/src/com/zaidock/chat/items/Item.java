@@ -5,31 +5,14 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import org.json.JSONObject;
-
 import com.zaidock.chat.Game;
 import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
+import com.zaidock.chat.JSONTools;
 import com.zaidock.chat.utills.Itemref;
 
 public class Item  extends Itemref{
-	
-	static JSONObject reader;
 
-	public static String get(String filepath, String type){
-		reader = new JSONObject(filepath);
-		
-		String out = reader.getString(type);
-		return out;
-	}
-	
-	public static String getFromObject(String filepath, String object, String type){
-		reader = new JSONObject(filepath);
-		
-		String out = reader.getJSONObject(object).getString(type);
-		return out;
-	}
-	
 	String itemname;
 	BufferedImage itemimage;
 	
@@ -40,7 +23,7 @@ public class Item  extends Itemref{
 		super(id, slot);
 		itemname = name;
 		try {
-			itemimage = ImageIO.read(getClass().getResourceAsStream(get(itemname, "iconImage")));
+			itemimage = ImageIO.read(getClass().getResourceAsStream(JSONTools.get(itemname, "iconImage")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

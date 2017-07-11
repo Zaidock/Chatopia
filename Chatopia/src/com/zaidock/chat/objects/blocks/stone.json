@@ -1,0 +1,8 @@
+{
+    "objectName" : "stoneblock",
+    "objectImage" : "stone.png",
+    "idtype" : "Stone",
+    
+    "canBePickedUp" : false,
+    "inventoryIcon" : null
+}
