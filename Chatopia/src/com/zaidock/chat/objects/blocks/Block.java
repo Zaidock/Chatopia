@@ -9,6 +9,7 @@ import com.zaidock.chat.Game;
 import com.zaidock.chat.Game.Slot;
 import com.zaidock.chat.ID;
 import com.zaidock.chat.JSONTools;
+import com.zaidock.chat.items.Item;
 import com.zaidock.chat.utills.Objectref;
 
 public class Block extends Objectref {
@@ -18,7 +19,11 @@ public class Block extends Objectref {
 	BufferedImage itemicon;
 	boolean canBePickedUp;
 	
+	Item item;
+	
+	@SuppressWarnings("unused")
 	private Game game;
+	@SuppressWarnings("unused")
 	private Slot slot;
 
 	public Block(ID id, Game game, Slot slot, String name) {
@@ -37,6 +42,10 @@ public class Block extends Objectref {
 		}
 		this.game = game;
 		this.slot = slot;
+		
+		if (canBePickedUp){
+			item = new Item(id, game, slot, name);
+		}
 	}
 
 	@Override

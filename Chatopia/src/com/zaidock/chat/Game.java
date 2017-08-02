@@ -26,6 +26,8 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
+	public static Place currentPlace;
+
 	private Thread thread;
 	private boolean running = false;
 
@@ -64,9 +66,9 @@ public class Game extends Canvas implements Runnable {
 		Menu, Game, paused
 	};
 	
-	public enum MusicState {
-		worldDay, worldNight, chathub, introMission
-	}
+	public enum Place {
+		worldDay, worldNight, chathub, introMission, titlemenu
+	};
 
 	public enum Maps {
 		room, kichen, house, castleWall, dengeon, richsHouse
@@ -78,6 +80,7 @@ public class Game extends Canvas implements Runnable {
 
 	public State gameState = State.Menu;
 	public Maps currentMap = Maps.room;
+	public static Place musicPlace = Place.titlemenu;
 
 	public Inventory getInventory() {
 		return new Inventory(ID.Inventory, handler);
