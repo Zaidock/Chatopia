@@ -88,7 +88,7 @@ public class Handler {
 		this.block.add(block);
 	}
 
-	public void removeBlock() {
+	public void removeBlock(Block block) {
 		this.block.remove(block);
 	}
 

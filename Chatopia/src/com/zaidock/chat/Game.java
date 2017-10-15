@@ -185,34 +185,35 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		if (gameState == State.Game) {
-			if (currentMap == Maps.castleWall) {
-				hud.render(g);
-
-				g.drawImage(castleWall, 0, 0, null);
-				handler.render(g);
-				g.drawImage(CastleWallAccsesorys, 0, 0, null);
-			} else {
-				if (!(currentMap == Maps.castleWall)) {
-				}
-				if (currentMap == Maps.room) {
+		switch (gameState) {
+			case Game: switch (currentMap) {
+				case castleWall: 
+					hud.render(g);
+					g.drawImage(castleWall, 0, 0, null);
+					handler.render(g);
+					g.drawImage(CastleWallAccsesorys, 0, 0, null);
+					break;
+				case room:
 					hud.render(g);
 					g.drawImage(room, 0, 0, null);
 					handler.render(g);
-				}
-				if (currentMap == Maps.house) {
+				case house:
 					hud.render(g);
 					g.drawImage(house, 0, 0, null);
 					handler.render(g);
-				}
-				if (currentMap == Maps.richsHouse) {
+				case richsHouse:
 					hud.render(g);
 					g.drawImage(richsHouse, 0, 0, null);
 					handler.render(g);
-				}
+				default :
+					break;
 			}
-		} else if (gameState == State.Menu) {
-			menu.render(g);
+			case Menu:
+				menu.render(g);
+			case paused :
+				break;
+			default :
+				break;
 		}
 		g.dispose();
 		bs.show();
