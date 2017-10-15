@@ -124,9 +124,10 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public synchronized void stop() {
+		//You noob. You cannot stop a running thread.
+		running = false;
 		try {
 			thread.join();
-			running = false;
 			System.out.println("Stoping");
 		} catch (Exception e) {
 			e.printStackTrace();
